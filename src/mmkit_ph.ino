@@ -21,20 +21,17 @@
  * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- *
+ * ARDUINO PORTING OF THE ORIGINAL
  **************************************************************************/
 
-#include "hardware.h"
+#include "hardware/hardware.h"
 #include "maze.h"
 #include "sensors.h"
-#include "mouse.h"
+#include "hardware/mouse.h"
 #include "motors.h"
 #include "test.h"
-#include "ui.h"
-#include "streaming.h"
-
-
-
+#include "hardware/ui.h"
+#include "hardware/streaming.h"
 
 
 
@@ -44,7 +41,7 @@ unsigned long eventTrigger;
 static unsigned long boot_magic __attribute__((section(".noinit")));
 void setup() {
   hardwareInit();
-  console.begin(57600);
+  console.begin(57600); //Opens Serial Port
   digitalWrite(RED_LED, 1);
   sensorsDisable();
   motorsInit();
@@ -77,11 +74,11 @@ int i;
 
 void loop() {
 
-  breathePin(GREEN_LED);	// let the user know we are in standby
+  breathePin(GREEN_LED);  // let the user know we are in standby
   if (millis() > eventTrigger) {
     eventTrigger += eventInterval;
-    if (digitalRead(SEL1) == HIGH) {	// the same as the setting for FOLLOW
-      //      printSensors();
+    if (digitalRead(SEL1) == HIGH) {  // the same as the setting for FOLLOW
+      printSensors();
     }
   }
   if (buttonPressed()) {
@@ -93,4 +90,3 @@ void loop() {
     eventTrigger = millis(); // or we do catching up of missed events!
   }
 }
-

@@ -26,8 +26,8 @@
 
 
 #include "navigator.h"
-#include "hardware.h"
-#include "parameters.h"
+#include "hardware/hardware.h"
+#include "hardware/parameters.h"
 #include "motion.h"
 #include "sensors.h"
 #include "motors.h"

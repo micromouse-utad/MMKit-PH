@@ -7,8 +7,8 @@
 
 #include "avr/pgmspace.h"
 #include "acctable.h"
-#include "hardware.h"
-#include "parameters.h"
+#include "hardware/hardware.h"
+#include "hardware/parameters.h"
 
 // The motor acceleration can be adjusted here by magic arithmetic
 // The compiler does these calculations.
@@ -17,7 +17,7 @@
 // upper limit depends on motor drive voltage.
 // look at the acctable() comments for an explanation.
 // for this mouse the highest acceleration is about 5000 (1.1m/s/s)
-const long acceleration = 2118; // about 500mm/s/s
+const long acceleration = 2118; // about 500mm/s/s  upper limit is 5000 (1.1m/s/s)
 const long countZero = (F_COUNTER * sqrtf(2)) / sqrtf((float)acceleration);;
 
 

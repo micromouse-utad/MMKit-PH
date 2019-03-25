@@ -29,10 +29,10 @@
 #include "hardware.h"
 #include "parameters.h"
 #include "streaming.h"
-#include "maze.h"
+#include "../maze.h"
 #include "mouse.h"
-#include "sensors.h"
-#include "test.h"
+#include "../sensors.h"
+#include "../test.h"
 
 // taken from the CATERINA bootloader - run it at least 10kHz
 static volatile unsigned int LLEDPulse;
@@ -424,6 +424,7 @@ void printMazeDirs() {
     printNorthWalls(row);
     for (int col = 0; col < 16; col++) {
       unsigned char cell = row + 16 * col;
+      
       if (hasWall(cell, WEST)) {
         console << '|';
       } else {
@@ -433,7 +434,8 @@ void printMazeDirs() {
       if (cell == GOAL) {
         direction = 4;
       }
-      console << ' ' << dirChars[direction] << ' ';
+      console << ' ' << dirChars[direction];
+      //console << ' ';
     }
     console << '|' << endl;
   }

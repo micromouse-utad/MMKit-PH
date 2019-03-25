@@ -26,7 +26,7 @@
 
 #include "maze.h"
 #include "avr/pgmspace.h"
-#include "queue.h"
+#include "hardware/queue.h"
 
 unsigned char cost[256];
 unsigned char walls[256] __attribute__((section(".noinit")));	// the maze walls are preserved after a reset

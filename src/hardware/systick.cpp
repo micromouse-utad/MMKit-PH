@@ -29,8 +29,8 @@
 #include "systick.h"
 #include "hardware.h"
 #include "ui.h"
-#include "sensors.h"
-#include "navigator.h"
+#include "../sensors.h"
+#include "../navigator.h"
 
 #ifndef  TCNT3
 #error "SYSTICK uses TIMER3"

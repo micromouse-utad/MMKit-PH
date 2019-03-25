@@ -26,17 +26,17 @@
 
 
 #include "test.h"
-#include "hardware.h"
-#include "parameters.h"
+#include "hardware/hardware.h"
+#include "hardware/parameters.h"
 #include "maze.h"
-#include "mouse.h"
+#include "hardware/mouse.h"
 #include "motors.h"
-#include "ui.h"
+#include "hardware/ui.h"
 #include "sensors.h"
 #include "motion.h"
 #include "navigator.h"
-#include "volatiles.h"
-#include "streaming.h"
+#include "hardware/volatiles.h"
+#include "hardware/streaming.h"
 
 // taken from Repetier 3D printer sources
 int getFreeRam() {

@@ -55,10 +55,10 @@ void hardwareInit();
 #define NENABLE 			12
 #define RED_LED 			13	 // on-board indicators
 #define GREEN_LED		17
-#define LEFT_FRONT 	A0	 // wall sensor receivers
-#define RIGHT_FRONT 	A1
+#define LEFT_FRONT 	    A0 //	 wall sensor receivers
+#define RIGHT_FRONT 	A1 
 #define LEFT_DIAG 		A2
-#define RIGHT_DIAG 	A3
+#define RIGHT_DIAG 	    A3
 #define M1 					A4 // microstepping control
 #define M0 					A5
 
