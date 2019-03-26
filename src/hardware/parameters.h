@@ -54,11 +54,11 @@ const int SYSTICK_FREQUENCY = 250;
 
 // Calibration values are the raw reading from the sensor
 // NOTE: side sensors see the front wall when the mouse is centered
-#define LD_CAL 150
-#define RD_CAL 150
+#define LD_CAL 555
+#define RD_CAL 555
 // NOTE: front sensor calibration is with the mouse against the rear wall
-#define LF_CAL 190
-#define RF_CAL 165
+#define LF_CAL 465
+#define RF_CAL 365
 
 // values that the sensors get normalised to when the mouse is correctly positioned
 // defined as longs to prevent overflow when normalising
@@ -70,11 +70,13 @@ const int SYSTICK_FREQUENCY = 250;
 // when we are within 50mm of any wall ahead,
 // the side sensors are unreliable. This is the normalised value seen by
 // (sensFL + sensFR) when we are too close
-#define FRONT_WALL_INTERFERENCE_THRESHOLD 300
+//#define FRONT_WALL_INTERFERENCE_THRESHOLD 300
+#define FRONT_WALL_INTERFERENCE_THRESHOLD 200
 
 // Thresholds for wall detection are compared to the normalised value
 #define DIAG_THRESHOLD 40
-#define FRONT_THRESHOLD 20
+//#define FRONT_THRESHOLD 20
+#define FRONT_THRESHOLD 60
 
 #define LEFT_FRONT_ERROR_MIN 5
 #define RIGHT_FRONT_ERROR_MIN 5

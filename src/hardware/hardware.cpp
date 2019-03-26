@@ -27,7 +27,7 @@
 #include "hardware.h"
 #include "parameters.h"
 #include "systick.h"
-#include "NullSerial.h"
+#include "nullserial.h"
 /***
  * On the Leonardo platform, Serial is a virtual com port and so
  * useless without a USB connection.

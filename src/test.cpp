@@ -172,7 +172,9 @@ void testSearcher(int target) {
   int result = mouseSearchTo(target);
   debug << F("Arrived at goal: status ") << result << endl;
   if (result != 0) {
-    panic();
+    console.println("PANIC");
+    return;
+    //panic();
   }
 
   digitalWrite(GREEN_LED, 1);
@@ -180,7 +182,9 @@ void testSearcher(int target) {
   result = mouseSearchTo(0);
   motorsDisable();
   if (result != 0) {
-    panic();
+    console.println("PANIC2");
+    return;
+    //panic();
   }
   debug << F("Arrived at home: status ") << result << endl;
   digitalWrite(RED_LED, 1);
@@ -190,7 +194,8 @@ void testSearcher(int target) {
 void testCalibrateFrontSensors() {
   int sum[127];
   int diff[127];
-  waitForClick();
+  //waitForClick();
+  waitForKeyboardEnter();
   motorsEnable();
   steeringMode = SM_FRONT;
   int distance = 0;

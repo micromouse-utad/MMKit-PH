@@ -207,7 +207,15 @@ bool buttonReleased() {
 void waitForClick() {
   while (buttonReleased()) {};
   while (buttonPressed()) {};
+}
 
+void waitForKeyboardEnter() {
+  console << F("Press Enter to continue...");
+  console << endl;
+  int data = 0;
+  while(data != 13) { // Enter
+    data = console.read();
+  }
 }
 
 
@@ -256,6 +264,18 @@ void doCLI() {
   int data = console.read();
   delay(100); // enough time for a reasonably long input line to fill buffer
   switch (data) {
+    case 'g':
+      console.print(F("\nSearching...\n"));
+      testSearcher(GOAL);
+      break;
+    case 'G':
+      console.print(F("\nRunning...\n"));
+      mouseRunMaze();
+      break;
+    case 'c':
+      console.println(F("\nCalibrate Front Sensors...\n"));
+      testCalibrateFrontSensors();
+      break;
     case 'W':
     case 'w':
       printMazeWallData();
@@ -304,6 +324,10 @@ void doCLI() {
       console << F("Mouse location: 0x") << _HEX(mouse.location) << endl;
       console << F("Mouse heading:    ") << _HEX(mouse.heading) << endl;
       break;
+    case 'h':
+    case 'H':
+      printHelp();
+      break;
     default:
       console.print(F("I received: "));
       console.print(data, DEC);
@@ -329,6 +353,13 @@ void printMouseParameters() {
 }
 
 void printSensors() {
+  console << F("\nRaw Values:        ");
+  console << _JUSTIFY(rawFL, 5);
+  console << _JUSTIFY(rawL, 5);
+  console << _JUSTIFY(rawR, 5);
+  console << _JUSTIFY(rawFR, 5);
+  console << endl;
+  console << F("Normalized Values: ");
   console << _JUSTIFY(sensFL, 5);
   console << _JUSTIFY(sensL, 5);
   console << _JUSTIFY(sensR, 5);
@@ -457,4 +488,19 @@ void printMazeWallData() {
 }
 
 
-
+void printHelp() {
+  console << F("\nHelp Page for the console commands") << endl;
+  console << F("\tg   - Start Search") << endl;
+  console << F("\tG   - Start Run") << endl;
+  console << F("\tc   - Start Front Sensors Calibration") << endl;
+  console << F("\tw,W - Print Maze Walls") << endl;
+  console << F("\tm   - Print Maze Walls Simple") << endl;
+  console << F("\tM   - Print Maze Directions and Costs") << endl;
+  console << F("\tr,R - Test Solution") << endl;
+  console << F("\ts,S - Print Sensors") << endl;
+  console << F("\tp,P - Print Mouse Parameters") << endl;
+  console << F("\tx   - Reset Maze") << endl;
+  console << F("\tX   - Reset Maze to Japan 2007 Finals") << endl;
+  console << F("\ti,I - Print Mouse Location/Direction") << endl;
+  console << F("\th,H - Print Help Page") << endl;
+}

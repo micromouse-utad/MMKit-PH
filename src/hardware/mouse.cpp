@@ -102,9 +102,9 @@ void mouseShowStatus() {
   }
   debug << _HEX(mouse.location) << ':';
   debug << dirLetters[mouse.heading] << ' ' << 'W' << '=';
-  mouse.leftWall ? debug << '1' : debug << ' ';
-  mouse.frontWall ? debug << '1' : debug << ' ';
-  mouse.rightWall ? debug << '1' : debug << ' ';
+  mouse.leftWall ? debug << '1' : debug << '0';
+  mouse.frontWall ? debug << '1' : debug << '0';
+  mouse.rightWall ? debug << '1' : debug << '0';
   debug << endl;
 }
 

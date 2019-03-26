@@ -29,7 +29,8 @@
 #define MAZE_H
 
 
-#define GOAL 0x22
+//#define GOAL 0x22
+#define GOAL 0x21
 
 
 
