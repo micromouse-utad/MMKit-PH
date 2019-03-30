@@ -25,30 +25,50 @@
  **************************************************************************/
 
 
-#ifndef TEST_H
-#define TEST_H
 
-// use these macros to run a function many times and test its execution time
-#define TENTIMES(x) do { x; x; x; x; x; x; x; x; x; x; } while (0)  //NOLINT
-#define FIFTYTIMES(x) do { TENTIMES(x); TENTIMES(x); TENTIMES(x); TENTIMES(x); TENTIMES(x); } while (0) //NOLINT
+#include "systick.h"
+#include "hardware.h"
+#include "ui.h"
+#include "../../sensors.h"
+#include "../../navigator.h"
 
-int getFreeRam();
+#ifndef  TCNT3
+#error "SYSTICK uses TIMER3"
+#endif
 
+static unsigned int timerReload = (F_CPU / 8L / 250);
 
-void testMove();
-void testForward(long distance, int maxSpeed);
-void testSensors();
-void testSteering();
-void testSteeringErrorSides();
-void testSteeringErrorFront();
-void testSensorEdge(int side);
-void testFollower(int target);
-void testSearcher(int target);
-void testCalibrateFrontSensors();
-void testCalibrateSensors();
+/***
+ * Normally the systick event is triggered at a regular interval by a
+ * timer interrupt. In PORTEDmouse, the interval is 250 Hz. For a DC
+ * mouse with a faster processor, systick will run at 1kHz or faster
+ * and will also process the encoders and update all the PID controllers
+ * as well as generate the motor PWM signals
+ */
+void systickInit(int frequency) {
+  timerReload = (F_CPU / 8L / frequency);
+  /// Timer 3 is used to generate the 500Hz system update
+  TCCR3A = 0x00;  // normal port operation, no auto change of OCnA/B/C pins
+  TCNT3 = 0;      // start the timer at 0x0000
+  OCR3A = timerReload;
+  TCCR3B = 0x02; //  0: off, 1 => FCPU/1, 2 => FCPU/8, 3 => FCPU/64
+  TIMSK3 |= (1 << OCIE3A);
+}
 
-class test {
+/***
+ * systick is defined as a function so that it may be called from
+ * test code when the interrupt is not running
+ */
 
-};
+void systick() {
+  // enable interrupts for the motor driver
+  sei();
+  navigatorUpdate();
+  debouncePin(BUTTON);
+  sensorUpdate();
+}
 
-#endif //TEST_H
+ISR(TIMER3_COMPA_vect) {      // 500Hz system timer
+  OCR3A += timerReload;		// do this early to preserve the timing
+  systick();
+}

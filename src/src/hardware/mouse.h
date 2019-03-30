@@ -1,6 +1,6 @@
 /***********************************************************************
- * Created by Peter Harrison on 03/01/2018.
- * Copyright (c) 2018 Peter Harrison
+ * Created by Peter Harrison on 23/12/2017.
+ * Copyright (c) 2017 Peter Harrison
  *
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -25,30 +25,48 @@
  **************************************************************************/
 
 
-#ifndef TEST_H
-#define TEST_H
-
-// use these macros to run a function many times and test its execution time
-#define TENTIMES(x) do { x; x; x; x; x; x; x; x; x; x; } while (0)  //NOLINT
-#define FIFTYTIMES(x) do { TENTIMES(x); TENTIMES(x); TENTIMES(x); TENTIMES(x); TENTIMES(x); } while (0) //NOLINT
-
-int getFreeRam();
+#ifndef MOUSE_H
+#define MOUSE_H
 
 
-void testMove();
-void testForward(long distance, int maxSpeed);
-void testSensors();
-void testSteering();
-void testSteeringErrorSides();
-void testSteeringErrorFront();
-void testSensorEdge(int side);
-void testFollower(int target);
-void testSearcher(int target);
-void testCalibrateFrontSensors();
-void testCalibrateSensors();
-
-class test {
-
+enum {
+  FRESH_START,
+  SEARCHING,
+  INPLACE_RUN,
+  SMOOTH_RUN,
+  FINISHED
 };
 
-#endif //TEST_H
+class Mouse {
+public:
+  unsigned char heading;
+  unsigned char location;
+  bool leftWall;
+  bool frontWall;
+  bool rightWall;
+  bool handStart;
+};
+
+extern char mouseState;
+
+extern Mouse mouse;
+extern  char path[];
+extern  char commands[];
+
+void mouseInit();
+void mouseCheckWallSensors();
+void mouseTurnToFace(unsigned char newHeading);
+void mouseFollowTo(int target);
+int mouseSearchTo(int target);
+void mouseRunInplaceTurns(int topSpeed);
+void mouseRunSmoothTurns(int topSpeed);
+void mouseUpdateMapFromSensors();
+
+int mouseSearchMaze();
+int mouseRunMaze();
+
+bool pathGenerate(unsigned char startCell);
+void pathExpand(char * pathString);
+
+
+#endif //MOUSE_H

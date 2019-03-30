@@ -1,6 +1,6 @@
 /***********************************************************************
- * Created by Peter Harrison on 03/01/2018.
- * Copyright (c) 2018 Peter Harrison
+ * Created by Peter Harrison on 30/12/2017.
+ * Copyright (c) 2017 Peter Harrison
  *
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -24,31 +24,26 @@
  *
  **************************************************************************/
 
-
-#ifndef TEST_H
-#define TEST_H
-
-// use these macros to run a function many times and test its execution time
-#define TENTIMES(x) do { x; x; x; x; x; x; x; x; x; x; } while (0)  //NOLINT
-#define FIFTYTIMES(x) do { TENTIMES(x); TENTIMES(x); TENTIMES(x); TENTIMES(x); TENTIMES(x); } while (0) //NOLINT
-
-int getFreeRam();
+#ifndef NAVIGATOR_H_
+#define NAVIGATOR_H_
 
 
-void testMove();
-void testForward(long distance, int maxSpeed);
-void testSensors();
-void testSteering();
-void testSteeringErrorSides();
-void testSteeringErrorFront();
-void testSensorEdge(int side);
-void testFollower(int target);
-void testSearcher(int target);
-void testCalibrateFrontSensors();
-void testCalibrateSensors();
-
-class test {
-
+enum STEERING_MODE {
+  SM_NONE = 0,
+  SM_STRAIGHT = 1,
+  SM_FRONT = 2,
 };
 
-#endif //TEST_H
+extern volatile STEERING_MODE steeringMode;
+extern volatile int steeringError;
+
+
+int getSteeringError();
+void navigatorUpdate();
+void adjustFrontDistance();
+void adjustFrontAngle();
+void doAlignment();
+
+
+
+#endif /* NAVIGATOR_H_ */

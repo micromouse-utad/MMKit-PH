@@ -1,6 +1,6 @@
 /***********************************************************************
- * Created by Peter Harrison on 03/01/2018.
- * Copyright (c) 2018 Peter Harrison
+ * Created by Peter Harrison on 22/12/2017.
+ * Copyright (c) 2017 Peter Harrison
  *
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -24,31 +24,50 @@
  *
  **************************************************************************/
 
+#ifndef UI_H_
+#define UI_H_
 
-#ifndef TEST_H
-#define TEST_H
+extern char dirLetters[];
+void breathePin(int pin);
+// use the front sensors as an input
+int waitForStart();
 
-// use these macros to run a function many times and test its execution time
-#define TENTIMES(x) do { x; x; x; x; x; x; x; x; x; x; } while (0)  //NOLINT
-#define FIFTYTIMES(x) do { TENTIMES(x); TENTIMES(x); TENTIMES(x); TENTIMES(x); TENTIMES(x); } while (0) //NOLINT
+// called in systick to test the user button
+void debouncePin(unsigned char pin);
 
-int getFreeRam();
+// return true only if the button is pressed for at least the debounce period
+bool buttonPressed();
+
+// return true only if the button is released for at least the debounce period
+bool buttonReleased();
+
+// return true only if the button was pressed and then released
+void waitForClick();
+
+// return true only when <Enter> is pressed to the console
+void waitForKeyboardEnter();
 
 
-void testMove();
-void testForward(long distance, int maxSpeed);
-void testSensors();
-void testSteering();
-void testSteeringErrorSides();
-void testSteeringErrorFront();
-void testSensorEdge(int side);
-void testFollower(int target);
-void testSearcher(int target);
-void testCalibrateFrontSensors();
-void testCalibrateSensors();
+void panic();
 
-class test {
+void doButton();
+void doCLI();
 
+void printSensors();
+
+void printMouseParameters();
+
+void printMazePlain();
+void printMazeCosts();
+void printMazeDirs();
+void printMazeWallData();
+
+void printHelp();
+
+class ui {
+public:
+  ui();
+  virtual ~ui();
 };
 
-#endif //TEST_H
+#endif /* UI_H_ */

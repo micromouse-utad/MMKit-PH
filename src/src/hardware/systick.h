@@ -24,31 +24,15 @@
  *
  **************************************************************************/
 
+#ifndef SYSTICK_H_
+#define SYSTICK_H_
 
-#ifndef TEST_H
-#define TEST_H
-
-// use these macros to run a function many times and test its execution time
-#define TENTIMES(x) do { x; x; x; x; x; x; x; x; x; x; } while (0)  //NOLINT
-#define FIFTYTIMES(x) do { TENTIMES(x); TENTIMES(x); TENTIMES(x); TENTIMES(x); TENTIMES(x); } while (0) //NOLINT
-
-int getFreeRam();
+#warning "Do not use tone() or notone() or systick will fail"
 
 
-void testMove();
-void testForward(long distance, int maxSpeed);
-void testSensors();
-void testSteering();
-void testSteeringErrorSides();
-void testSteeringErrorFront();
-void testSensorEdge(int side);
-void testFollower(int target);
-void testSearcher(int target);
-void testCalibrateFrontSensors();
-void testCalibrateSensors();
 
-class test {
+void systickInit(int frequency);
+void systick();
 
-};
 
-#endif //TEST_H
+#endif /* SYSTICK_H_ */

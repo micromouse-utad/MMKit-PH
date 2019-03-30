@@ -29,10 +29,10 @@
 #include "hardware.h"
 #include "parameters.h"
 #include "streaming.h"
-#include "../maze.h"
+#include "../../maze.h"
 #include "mouse.h"
-#include "../sensors.h"
-#include "../test.h"
+#include "../../sensors.h"
+#include "../../test.h"
 
 // taken from the CATERINA bootloader - run it at least 10kHz
 static volatile unsigned int LLEDPulse;
@@ -274,7 +274,7 @@ void doCLI() {
       break;
     case 'c':
       console.println(F("\nCalibrate Front Sensors...\n"));
-      testCalibrateFrontSensors();
+      testCalibrateSensors();
       break;
     case 'W':
     case 'w':
@@ -492,7 +492,7 @@ void printHelp() {
   console << F("\nHelp Page for the console commands") << endl;
   console << F("\tg   - Start Search") << endl;
   console << F("\tG   - Start Run") << endl;
-  console << F("\tc   - Start Front Sensors Calibration") << endl;
+  console << F("\tc   - Start Sensors Calibration") << endl;
   console << F("\tw,W - Print Maze Walls") << endl;
   console << F("\tm   - Print Maze Walls Simple") << endl;
   console << F("\tM   - Print Maze Directions and Costs") << endl;

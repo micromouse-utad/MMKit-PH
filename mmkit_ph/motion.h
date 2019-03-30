@@ -1,6 +1,6 @@
 /***********************************************************************
- * Created by Peter Harrison on 03/01/2018.
- * Copyright (c) 2018 Peter Harrison
+ * Created by Peter Harrison on 30/12/2017.
+ * Copyright (c) 2017 Peter Harrison
  *
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -25,30 +25,23 @@
  **************************************************************************/
 
 
-#ifndef TEST_H
-#define TEST_H
+#ifndef MOTION_H
+#define MOTION_H
 
-// use these macros to run a function many times and test its execution time
-#define TENTIMES(x) do { x; x; x; x; x; x; x; x; x; x; } while (0)  //NOLINT
-#define FIFTYTIMES(x) do { TENTIMES(x); TENTIMES(x); TENTIMES(x); TENTIMES(x); TENTIMES(x); } while (0) //NOLINT
+void startForward(int maxSpeed);
+void startReverse(int maxSpeed);
 
-int getFreeRam();
+void forward(long steps, int maxSpeed, int exitSspeed);
+void spin(long steps, int maxSpeed, int exitSpeed);
 
 
-void testMove();
-void testForward(long distance, int maxSpeed);
-void testSensors();
-void testSteering();
-void testSteeringErrorSides();
-void testSteeringErrorFront();
-void testSensorEdge(int side);
-void testFollower(int target);
-void testSearcher(int target);
-void testCalibrateFrontSensors();
-void testCalibrateSensors();
 
-class test {
+void turnIP180();
+void turnIP90R();
+void turnIP90L();
+void turnSS90L();
+void turnSS90R();
 
-};
 
-#endif //TEST_H
+
+#endif //MOTION_H

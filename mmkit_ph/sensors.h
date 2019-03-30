@@ -1,6 +1,6 @@
 /***********************************************************************
- * Created by Peter Harrison on 03/01/2018.
- * Copyright (c) 2018 Peter Harrison
+ * Created by Peter Harrison on 30/12/2017.
+ * Copyright (c) 2017 Peter Harrison
  *
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -25,30 +25,47 @@
  **************************************************************************/
 
 
-#ifndef TEST_H
-#define TEST_H
-
-// use these macros to run a function many times and test its execution time
-#define TENTIMES(x) do { x; x; x; x; x; x; x; x; x; x; } while (0)  //NOLINT
-#define FIFTYTIMES(x) do { TENTIMES(x); TENTIMES(x); TENTIMES(x); TENTIMES(x); TENTIMES(x); } while (0) //NOLINT
-
-int getFreeRam();
+#ifndef SENSORS_H
+#define SENSORS_H
 
 
-void testMove();
-void testForward(long distance, int maxSpeed);
-void testSensors();
-void testSteering();
-void testSteeringErrorSides();
-void testSteeringErrorFront();
-void testSensorEdge(int side);
-void testFollower(int target);
-void testSearcher(int target);
-void testCalibrateFrontSensors();
-void testCalibrateSensors();
 
-class test {
+extern bool sensorsEnabled;
+
+// normalised sensor values
+extern volatile int sensFR;
+extern volatile int sensFL;
+extern volatile int sensR;
+extern volatile int sensL;
+
+extern volatile int frontSum;
+extern volatile int frontDiff;
+// raw values
+extern int rawFR;
+extern int rawFL;
+extern int rawR;
+extern int rawL;
+
+
+extern volatile int sensorState;
+
+// sensor wall detection
+extern volatile bool wallSensorRight;
+extern volatile bool wallSensorLeft;
+extern volatile bool wallSensorFrontRight;
+extern volatile bool wallSensorFrontLeft;
+extern volatile bool wallSensorFront;
+
+void sensorsInit();
+int sensorGetFrontDistance();
+int sensorGetFrontSteering(int distance);
+void sensorUpdate();
+void sensorsEnable();
+void sensorsDisable();
+
+
+class sensors {
 
 };
 
-#endif //TEST_H
+#endif //SENSORS_H

@@ -54,11 +54,11 @@ const int SYSTICK_FREQUENCY = 250;
 
 // Calibration values are the raw reading from the sensor
 // NOTE: side sensors see the front wall when the mouse is centered
-#define LD_CAL 555
-#define RD_CAL 555
+#define LD_CAL 568
+#define RD_CAL 597
 // NOTE: front sensor calibration is with the mouse against the rear wall
-#define LF_CAL 465
-#define RF_CAL 365
+#define LF_CAL 327
+#define RF_CAL 319
 
 // values that the sensors get normalised to when the mouse is correctly positioned
 // defined as longs to prevent overflow when normalising
