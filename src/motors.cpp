@@ -25,10 +25,10 @@
  **************************************************************************/
 
 #include "motors.h"
-#include "src/hardware/hardware.h"
-#include "src/hardware/parameters.h"
+#include "parameters.h"
 #include "acctable.h"
 #include "src/hardware/volatiles.h"
+#include "src/hardware/hardware.h"
 
 volatile long offsetCount;	// position within a cell
 volatile long positionCount;	// sum of steps by both motors;

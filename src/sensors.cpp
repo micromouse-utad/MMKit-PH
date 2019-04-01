@@ -25,8 +25,8 @@
  **************************************************************************/
 
 #include "sensors.h"
+#include "parameters.h"
 #include "src/hardware/hardware.h"
-#include "src/hardware/parameters.h"
 
 
 bool sensorsEnabled;

@@ -26,12 +26,12 @@
 
 
 #include "motion.h"
-#include "src/hardware/hardware.h"
-#include "src/hardware/parameters.h"
+#include "parameters.h"
 #include "motors.h"
-#include "src/hardware/mouse.h"
 #include "navigator.h"
 #include "src/hardware/volatiles.h"
+#include "src/hardware/hardware.h"
+#include "src/hardware/mouse.h"
 
 
 

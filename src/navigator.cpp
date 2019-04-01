@@ -26,11 +26,11 @@
 
 
 #include "navigator.h"
-#include "src/hardware/hardware.h"
-#include "src/hardware/parameters.h"
+#include "parameters.h"
 #include "motion.h"
 #include "sensors.h"
 #include "motors.h"
+#include "src/hardware/hardware.h"
 
 
 volatile STEERING_MODE steeringMode;
