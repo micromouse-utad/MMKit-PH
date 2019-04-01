@@ -273,8 +273,12 @@ void doCLI() {
       mouseRunMaze();
       break;
     case 'c':
-      console.println(F("\nCalibrate Front Sensors...\n"));
+      console.println(F("\nCalibrate Sensors...\n"));
       testCalibrateSensors();
+      break;
+    case 'C':
+      console.println(F("\nCalibrate Front Sensors...\n"));
+      testCalibrateFrontSensors();
       break;
     case 'W':
     case 'w':
@@ -493,6 +497,7 @@ void printHelp() {
   console << F("\tg   - Start Search") << endl;
   console << F("\tG   - Start Run") << endl;
   console << F("\tc   - Start Sensors Calibration") << endl;
+  console << F("\tC   - Start Front Sensors Calibration") << endl;
   console << F("\tw,W - Print Maze Walls") << endl;
   console << F("\tm   - Print Maze Walls Simple") << endl;
   console << F("\tM   - Print Maze Directions and Costs") << endl;

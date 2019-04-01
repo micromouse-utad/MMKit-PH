@@ -232,13 +232,48 @@ void testCalibrateFrontSensors() {
 void testCalibrateSensors() {
   console << F("Starting sensors calibration routine...") << endl << endl;
 
+  // SIDE SENSORS
   console << F("Side sensors calibration...") << endl;
   console << F("  Position the mouse in the center of a cell with walls at all sides and") << endl;
   console << F("  move the side sensors so as to detect to the the edges of the front wall.") << endl << endl;
 
   waitForKeyboardEnter();
 
-  console << F("Now record the sensors value") << endl;
+  console << F("  Now record the sensors value") << endl;
+  console << F("  (The values should be similar in both sides, if not, adjust the sensors") << endl;
+  console << F("   so that they are as close as possible)") << endl;
 
+  int tmpInput = 0;
+  while (tmpInput != 13) {
+    console << F("  Front Left Sensor: ");
+    console << _JUSTIFY(rawFL, 5); << endl;
+    console << F("  Front Right Sensor: ");
+    console << _JUSTIFY(rawFR, 5) << endl;
 
+    console << F("  Press any key to print values again and <enter> to continue...") << endl;
+    tmpInput = console.read();
+  }
+
+  // FRONT SENSORS
+  console << F("Front sensors calibration...") << endl;
+  console << F("  Now position the mouse against the rear wall, with walls at all sides.") << endl;
+
+  waitForKeyboardEnter();
+
+  console << F("  Now record the sensors value") << endl;
+  console << F("  (The values should be similar in both sides, if not, adjust the sensors") << endl;
+  console << F("   so that they are as close as possible)") << endl;
+
+  tmpInput = 0;
+  while (tmpInput != 13) {
+    console << F("  Left Sensor: ");
+    console << _JUSTIFY(rawL, 5); << endl;
+    console << F("  Right Sensor: ");
+    console << _JUSTIFY(rawR, 5) << endl;
+
+    console << F("  Press any key to print values again and <enter> to continue...") << endl;
+    tmpInput = console.read();
+  }
+
+  // ARRAYS CALIBRATION
 }
