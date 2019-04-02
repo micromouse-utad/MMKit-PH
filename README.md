@@ -12,7 +12,7 @@ This repository is a fork of [Peter's Harrison code](https://github.com/micromou
     <th>Image</th>
   <tr>
     <td>1</td>
-    <td>Left IR Sensor</td>
+    <td>Left Diagonal IR Sensor</td>
     <td rowspan="16"><img src="https://www.micromouse.utad.pt/wp-content/uploads/2016/05/MicromouseKit-3.png" width=450</img></td>
 
   </tr>
@@ -42,7 +42,7 @@ This repository is a fork of [Peter's Harrison code](https://github.com/micromou
   </tr>
   <tr>
     <td>8</td>
-    <td>Right IR Sensor</td>
+    <td>Right Diagonal IR Sensor</td>
   </tr>
   <tr>
     <td>9</td>
