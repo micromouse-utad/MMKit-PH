@@ -139,7 +139,7 @@ When the mouse is moving, be sure to not influence its movement, if connected to
 
 After the subroutine is finished, save the first array of values in the variable _frontSumTable_, and the second array of values in the variable _frontDiffTable_, inside the file _sensors.cpp_.
 
-**NOTE:** If the mouse moves forward, instead of backwards, you have the motors connected in the wrong order, and you will need to swap the left with the right motor connection.
+***NOTE:*** If the mouse moves forward, instead of backwards, you have the motors connected in the wrong order, and you will need to swap the left with the right motor connection.
 
 ### Adjust the threshold values
 
