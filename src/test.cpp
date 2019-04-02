@@ -200,9 +200,8 @@ void testSearcher(int target) {
 void testCalibrateFrontSensors() {
   int sum[127];
   int diff[127];
-  waitForClick();
-  delay(3000);
-  //waitForKeyboardEnter();
+  //waitForClick();
+  waitForKeyboardEnter();
   motorsEnable();
   steeringMode = SM_FRONT;
   int distance = 0;
