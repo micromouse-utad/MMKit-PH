@@ -1,6 +1,6 @@
 # MMKit-PH
 
-This repository is a fork of [Peter's Harrison code](https://github.com/micromouseonline/ported-micromouse) for the [MMKit](https://www.micromouse.utad.pt/?page_id=998&lang=en). The repository was created to make it easier to run Peter's code using the Arduino IDE, as well as to help in the calibration processes needed to get the micromouse running correctly.
+This repository is a fork of [Peter Harrison's code](https://github.com/micromouseonline/ported-micromouse) for the [MMKit](https://www.micromouse.utad.pt/?page_id=998&lang=en). The repository was created to make it easier to run Peter's code using the Arduino IDE, as well as to help in the calibration processes needed to get the micromouse running correctly.
 
 ## Index
 1. [The Kit](#the-kit)
