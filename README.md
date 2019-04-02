@@ -100,7 +100,9 @@ Before starting the calibration process, it is required to have a Serial connect
 
 The MMKit UART connection is as follow:
 
-<img src="imgs/mmkit_uart.png" width=500></img>
+<p align="center">
+    <img src="imgs/mmkit_uart.png" width=500></img>
+</p>
 
 To connect to the UART you can use the program [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html), with the baud rate being 57600 or, alternately, the Arduino Serial Monitor, also using the same baud rate, just remember to change the connection port before using the Serial Monitor.
 
