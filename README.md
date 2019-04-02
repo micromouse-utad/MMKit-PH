@@ -91,7 +91,7 @@ The MMKit UART connection is as follow:
 
 <img src="imgs/mmkit_uart.png" width=500></img>
 
-To connect to the UART you can use the program [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html), with the baud rate being 57600.
+To connect to the UART you can use the program [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html), with the baud rate being 57600 or use the Arduino Serial port also using the same baud rate
 
 After the Serial connection is made, you can press 'h' to get the full list of commands available through it.
 
@@ -143,7 +143,7 @@ After the subroutine is finished, save the first array of values in the variable
 
 ### Adjust the threshold values
 
-The final step for the calibration is to adjust the threshold values 
+The final step for the calibration is to adjust the threshold values, for this you can use the command 'S' under the serial port that shows the walls the mouse is currently detecting together with sensor calibrated values. You can change DIAG_THRESHOLD, FRONT_THRESHOLD and FRONT_WALL_INTERFERENCE_THRESHOLD so the mouse sees the walls correctly.
 
 # Usage
 
