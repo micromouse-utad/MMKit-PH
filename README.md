@@ -2,6 +2,17 @@
 
 This repository is a fork of [Peter's Harrison code](https://github.com/micromouseonline/ported-micromouse) for the [MMKit](https://www.micromouse.utad.pt/?page_id=998&lang=en). The repository was created to make it easier to run Peter's code using the Arduino IDE, as well as to help in the calibration processes needed to get the micromouse running correctly.
 
+## Index
+1. [The Kit](#the-kit)
+2. [Installation](#installation)
+3. [Serial Connection](#serial-connection)
+4. [Calibration](#calibration)
+    - [Side sensors raw calibration](#side-sensors-raw-calibration)
+    - [Front sensors raw calibration](#front-sensors-raw-calibration)
+    - [Front sensors sum/diff calibration](#front-sensors-sumdiff-calibration)
+    - [Adjust the threshold values](#adjust-the-threshold-values)
+5. [Usage](#usage)
+
 ## The Kit
 
 <table>
@@ -85,13 +96,13 @@ After, uncompressed the code in the desired location on your machine and just op
 
 ## Serial Connection
 
-Before starting the calibration process of the code for the mouse, it is required to have a Serial connection to the mouse via the Bluetooth Connector ([Label 10](#the-kit)), not necessarily needing to be a Bluetooth adapter, any UART to USB adapter should work in this case.
+Before starting the calibration process, it is required to have a Serial connection to the mouse via the Bluetooth Connector ([Label 10](#the-kit)), not necessarily needing to be a Bluetooth adapter, any UART to USB adapter should work in this case.
 
 The MMKit UART connection is as follow:
 
 <img src="imgs/mmkit_uart.png" width=500></img>
 
-To connect to the UART you can use the program [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html), with the baud rate being 57600 or use the Arduino Serial port also using the same baud rate
+To connect to the UART you can use the program [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html), with the baud rate being 57600 or, alternately, the Arduino Serial Monitor, also using the same baud rate, just remember to change the connection port before using the Serial Monitor.
 
 After the Serial connection is made, you can press 'h' to get the full list of commands available through it.
 
@@ -143,7 +154,7 @@ After the subroutine is finished, save the first array of values in the variable
 
 ### Adjust the threshold values
 
-The final step for the calibration is to adjust the threshold values, for this you can use the command 'S' under the serial port that shows the walls the mouse is currently detecting together with sensor calibrated values. You can change DIAG_THRESHOLD, FRONT_THRESHOLD and FRONT_WALL_INTERFERENCE_THRESHOLD so the mouse sees the walls correctly.
+The final step for the calibration is to adjust the threshold values, for this you can use the command 'S' under the serial port that shows the walls the mouse is currently detecting together with sensor calibrated values. You can change _DIAG\_THRESHOLD_, _FRONT\_THRESHOLD_ and _FRONT\_WALL\_INTERFERENCE\_THRESHOLD_, in the file _parameters.h_, so the mouse sees the walls correctly.
 
 # Usage
 
