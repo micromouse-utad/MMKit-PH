@@ -107,7 +107,7 @@ The calibration consists of 4 parts:
 
 To help with this process a routine was created to help you calibrate the robot, you cal call it if connected through the UART by pressing the key 'c'.
 
-#### Side sensors raw calibration
+### Side sensors raw calibration
 
 <img src="/imgs/mmkit_centered.jpg" width=255 align="Right"></img> 
 The first step in calibrating the raw value of the side sensors is to place the robot in the center of a cell, with a wall in each of the sides.
@@ -118,7 +118,7 @@ When reading the sensors values, they should be similar in both sides, if not, a
 Finally, save the read values in the variables _LD\_CAL_ and _RD\_CAL_, for the Left Diagonal value and Right Diagonal value correspondingly, inside the file _parameters.h_.
 
 &nbsp;
-#### Front sensors raw calibration
+### Front sensors raw calibration
 
 <img src="imgs/mmkit_back.jpg" width=255 align="Left"></img>
 For the front sensors raw calibration, the steps are similar to before. Start by placing the mouse in a cell with a wall in each of the sides, except, this time, the mouse should be place against the rear wall, instead of centered in the cell.
@@ -128,7 +128,7 @@ As before, when reading the sensors values, they should be similar in both sides
 To finalize, the read values must be saved in the variables _LF\_CAL_ and _RF\_CAL_, for the Front Left value and Front Right value correspondingly, inside the file _parameters.h_. 
 
 &nbsp;
-#### Front sensors sum/diff calibration
+### Front sensors sum/diff calibration
 
 <img src="/imgs/mmkit_front_back.jpg" width=255 align="Right"></img>
 The next step is to calibrate the sum/diffs for the front sensors. To do so, position the mouse against the rear wall, but with the front of the mouse faced to it.
@@ -139,9 +139,9 @@ When the mouse is moving, be sure to not influence its movement, if connected to
 
 After the subroutine is finished, save the first array of values in the variable _frontSumTable_, and the second array of values in the variable _frontDiffTable_, inside the file _sensors.cpp_.
 
-**NOTE** If the mouse moves forward, instead of backwards, you have the motors connected in the wrong order, and you will need to swap the left with the right motor connection.
+**NOTE:** If the mouse moves forward, instead of backwards, you have the motors connected in the wrong order, and you will need to swap the left with the right motor connection.
 
-#### Adjust the threshold values
+### Adjust the threshold values
 
 The final step for the calibration is to adjust the threshold values 
 
