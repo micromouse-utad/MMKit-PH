@@ -28,11 +28,7 @@
 #ifndef MAZE_H
 #define MAZE_H
 
-
-//#define GOAL 0x22
 #define GOAL 0x77
-
-
 
 // directions for mapping
 #define NORTH 0

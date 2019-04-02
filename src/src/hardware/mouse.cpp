@@ -26,14 +26,14 @@
 
 #include "mouse.h"
 #include "hardware.h"
-#include "parameters.h"
+#include "ui.h"
+#include "streaming.h"
 #include "../../maze.h"
 #include "../../motion.h"
 #include "../../motors.h"
 #include "../../sensors.h"
 #include "../../navigator.h"
-#include "ui.h"
-#include "streaming.h"
+#include "../../parameters.h"
 
 Mouse mouse;
 

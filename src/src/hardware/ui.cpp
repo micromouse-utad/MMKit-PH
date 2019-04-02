@@ -27,12 +27,12 @@
 
 #include "ui.h"
 #include "hardware.h"
-#include "parameters.h"
 #include "streaming.h"
-#include "../../maze.h"
 #include "mouse.h"
+#include "../../maze.h"
 #include "../../sensors.h"
 #include "../../test.h"
+#include "../../parameters.h"
 
 // taken from the CATERINA bootloader - run it at least 10kHz
 static volatile unsigned int LLEDPulse;
@@ -261,23 +261,24 @@ void doButton() {
 
 
 void doCLI() {
+  console << F("---------------------") << endl;
   int data = console.read();
   delay(100); // enough time for a reasonably long input line to fill buffer
   switch (data) {
     case 'g':
-      console.print(F("\nSearching...\n"));
+      console << F("Searching...") << endl;
       testSearcher(GOAL);
       break;
     case 'G':
-      console.print(F("\nRunning...\n"));
+      console << F("Running...") << endl;
       mouseRunMaze();
       break;
     case 'c':
-      console.println(F("\nCalibrate Sensors...\n"));
+      console << F("Calibrate Sensors...") << endl;
       testCalibrateSensors();
       break;
     case 'C':
-      console.println(F("\nCalibrate Front Sensors...\n"));
+      console << F("Calibrate Front Sensors...") << endl;
       testCalibrateFrontSensors();
       break;
     case 'W':
@@ -304,8 +305,10 @@ void doCLI() {
       console.println((char*)(commands));
       break;
     case 's':
-    case 'S':
       printSensors();
+      break;
+    case 'S':
+      printCurrentWalls(); 
       break;
     case 'p':
     case 'P':
@@ -343,6 +346,8 @@ void doCLI() {
       }
       console.println();
   }
+
+  console << endl << F(":");
   // in case console input has multiple characters, ditch the extras
   while (console.available()) {
     console.read();
@@ -352,8 +357,20 @@ void doCLI() {
 
 void printMouseParameters() {
   console << F("Ported Mouse parameters:") << endl;
-  console << F("counts per 180mm:  ") << MM(180) << endl;
-  console << F("counts per 360 deg: ") << DEG(360) << endl;
+  console << F("  Counts per 180mm:   ") << MM(180) << endl;
+  console << F("  Counts per 360 deg: ") << DEG(360) << endl;
+  console << F("  ######################################") << endl;
+  console << F("  Left sensor calibration: ") << LD_CAL << endl;
+  console << F("  Right sensor calibration: ") << RD_CAL << endl;
+  console << F("  Front Left sensor calibration: ") << LF_CAL << endl;
+  console << F("  Front Right sensor calibration: ") << RF_CAL << endl;
+  console << F("  Front wall interference threshold: ") << FRONT_WALL_INTERFERENCE_THRESHOLD << endl;
+  console << F("  Diagonal threshold: ") << DIAG_THRESHOLD << endl;
+  console << F("  Front threshold: ") << FRONT_THRESHOLD << endl;
+  console << F("  ######################################") << endl;
+  console << F("  Goal: ") << GOAL << F(" (0x");
+  console.print(GOAL, HEX);
+  console << F(")") << endl;
 }
 
 void printSensors() {
@@ -369,6 +386,35 @@ void printSensors() {
   console << _JUSTIFY(sensR, 5);
   console << _JUSTIFY(sensFR, 5);
   console << endl;
+}
+
+// prints currently detected walls
+void printCurrentWalls() {
+  boolean walls_detected = false;
+  if((sensFR > FRONT_THRESHOLD) && (sensFL > FRONT_THRESHOLD)) {
+    console << sensFL << F(" __ ") << sensFR << endl;
+    walls_detected = true;
+  }
+  else{
+    console << F("     ") << endl;
+  }
+
+  if (sensL < (DIAG_THRESHOLD)) {
+    console << F("     ");
+  } else  if (sensL > (DIAG_THRESHOLD + 5)) {
+    console << sensL << F("|  ");
+    walls_detected = true;
+  }
+
+
+  if (sensR < (DIAG_THRESHOLD)) {
+    console << F(" ") << endl;
+  } else if (sensR > (DIAG_THRESHOLD + 5)) {
+    console << F("|") << sensR << endl;
+    walls_detected = true;
+  }
+
+  if(walls == false) console << F("No walls detected") << endl;
 }
 
 
@@ -494,7 +540,7 @@ void printMazeWallData() {
 
 void printHelp() {
   console << F("\nHelp Page for the console commands") << endl;
-  console << F("\tg   - Start Search") << endl;
+  console << F("\tg   - Start Test Search") << endl;
   console << F("\tG   - Start Run") << endl;
   console << F("\tc   - Start Sensors Calibration") << endl;
   console << F("\tC   - Start Front Sensors Calibration") << endl;
@@ -502,7 +548,8 @@ void printHelp() {
   console << F("\tm   - Print Maze Walls Simple") << endl;
   console << F("\tM   - Print Maze Directions and Costs") << endl;
   console << F("\tr,R - Test Solution") << endl;
-  console << F("\ts,S - Print Sensors") << endl;
+  console << F("\ts   - Print Sensors") << endl;
+  console << F("\tS   - Print Current Walls") << endl;
   console << F("\tp,P - Print Mouse Parameters") << endl;
   console << F("\tx   - Reset Maze") << endl;
   console << F("\tX   - Reset Maze to Japan 2007 Finals") << endl;

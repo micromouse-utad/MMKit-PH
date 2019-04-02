@@ -26,17 +26,23 @@
 
 
 #include "test.h"
-#include "src/hardware/hardware.h"
-#include "src/hardware/parameters.h"
+#include "parameters.h"
 #include "maze.h"
-#include "src/hardware/mouse.h"
 #include "motors.h"
-#include "src/hardware/ui.h"
 #include "sensors.h"
 #include "motion.h"
 #include "navigator.h"
+#include "src/hardware/hardware.h"
+#include "src/hardware/mouse.h"
+#include "src/hardware/ui.h"
 #include "src/hardware/volatiles.h"
 #include "src/hardware/streaming.h"
+
+// Print colors
+#define ANSI_COLOR_RED     "\x1b[31m"
+#define ANSI_COLOR_YELLOW  "\x1b[33m"
+#define ANSI_COLOR_MAGENTA  "\u001b[35m"
+#define ANSI_COLOR_RESET   "\x1b[0m"
 
 // taken from Repetier 3D printer sources
 int getFreeRam() {
@@ -194,8 +200,9 @@ void testSearcher(int target) {
 void testCalibrateFrontSensors() {
   int sum[127];
   int diff[127];
-  //waitForClick();
-  waitForKeyboardEnter();
+  waitForClick();
+  delay(3000);
+  //waitForKeyboardEnter();
   motorsEnable();
   steeringMode = SM_FRONT;
   int distance = 0;
@@ -206,12 +213,12 @@ void testCalibrateFrontSensors() {
     if (mm != distance) {
       int left = getVolatile(sensFL);
       int right = getVolatile(sensFR);
-      console << _JUSTIFY(mm, 4) << ' ';
-      console << _JUSTIFY(left, 4) << ' ';
-      console << _JUSTIFY(right, 4) << ' ';
-      console << _JUSTIFY(left + right, 4) << ' ';
-      console << _JUSTIFY(sensorGetFrontDistance(), 4) << ' ';
-      console << _JUSTIFY(sensorGetFrontSteering(mm), 4) << endl;
+      //console << _JUSTIFY(mm, 4) << ' ';
+      //console << _JUSTIFY(left, 4) << ' ';
+      //console << _JUSTIFY(right, 4) << ' ';
+      //console << _JUSTIFY(left + right, 4) << ' ';
+      //console << _JUSTIFY(sensorGetFrontDistance(), 4) << ' ';
+      //console << _JUSTIFY(sensorGetFrontSteering(mm), 4) << endl;
       sum[distance] = left + right;
       diff[distance] = left - right;
       distance = mm;
@@ -219,61 +226,81 @@ void testCalibrateFrontSensors() {
   }
   forward(-60, 0, 0);
   motorsDisable();
+  console << F("Front Sum:") << endl;
   for (int i = 0; i < 127; i++) {
     console << _JUSTIFY(sum[i], 5) << ',';
   }
-  console.println();
+  console << endl << endl;
+  console << F("Front Diff:") << endl;
   for (int i = 0; i < 127; i++) {
     console << _JUSTIFY(diff[i], 5) << ',';
   }
-  console.println();
+  console << endl << endl;
 }
 
 void testCalibrateSensors() {
   console << F("Starting sensors calibration routine...") << endl << endl;
 
   // SIDE SENSORS
-  console << F("Side sensors calibration...") << endl;
+  console << ANSI_COLOR_YELLOW << F("(1/3) #############################") << ANSI_COLOR_RESET << endl;
+  console << F("Side sensors raw calibration...") << endl << endl;
   console << F("  Position the mouse in the center of a cell with walls at all sides and") << endl;
   console << F("  move the side sensors so as to detect to the the edges of the front wall.") << endl << endl;
 
   waitForKeyboardEnter();
 
-  console << F("  Now record the sensors value") << endl;
   console << F("  (The values should be similar in both sides, if not, adjust the sensors") << endl;
-  console << F("   so that they are as close as possible)") << endl;
+  console << F("   so that they are as close as possible)") << endl << endl;
 
   int tmpInput = 0;
   while (tmpInput != 13) {
-    console << F("  Front Left Sensor: ");
-    console << _JUSTIFY(rawFL, 5); << endl;
-    console << F("  Front Right Sensor: ");
-    console << _JUSTIFY(rawFR, 5) << endl;
+    if(tmpInput != -1) {
+      console << F("  Left Diagonal Sensor: ");
+      console << _JUSTIFY(rawL, 5) << endl;
+      console << F("  Right Diagonal Sensor: ");
+      console << _JUSTIFY(rawR, 5) << endl;
 
-    console << F("  Press any key to print values again and <enter> to continue...") << endl;
+      console << F("  Press any key to print values again and <enter> to continue...") << endl << endl;
+    }
     tmpInput = console.read();
   }
 
   // FRONT SENSORS
-  console << F("Front sensors calibration...") << endl;
-  console << F("  Now position the mouse against the rear wall, with walls at all sides.") << endl;
+  console << ANSI_COLOR_YELLOW << F("(2/3) #############################") << ANSI_COLOR_RESET << endl;
+  console << F("Front sensors raw calibration...") << endl;
+  console << F("  Now position the mouse against the rear wall, with walls at all sides.") << endl << endl;
 
   waitForKeyboardEnter();
 
-  console << F("  Now record the sensors value") << endl;
   console << F("  (The values should be similar in both sides, if not, adjust the sensors") << endl;
-  console << F("   so that they are as close as possible)") << endl;
+  console << F("   so that they are as close as possible)") << endl << endl;
 
   tmpInput = 0;
   while (tmpInput != 13) {
-    console << F("  Left Sensor: ");
-    console << _JUSTIFY(rawL, 5); << endl;
-    console << F("  Right Sensor: ");
-    console << _JUSTIFY(rawR, 5) << endl;
+    if(tmpInput != -1) {
+      console << F("  Front Left Sensor: ");
+      console << _JUSTIFY(rawFL, 5) << endl;
+      console << F("  Front Right Sensor: ");
+      console << _JUSTIFY(rawFR, 5) << endl;
 
-    console << F("  Press any key to print values again and <enter> to continue...") << endl;
+      console << F("  Press any key to print values again and <enter> to continue...") << endl << endl;
+    }
     tmpInput = console.read();
   }
 
   // ARRAYS CALIBRATION
+  console << ANSI_COLOR_YELLOW << F("(3/3) #############################") << ANSI_COLOR_RESET << endl;
+  console << F("Front sensors diff/sum calibration...") << endl;
+  console << F("  Position the mouse faced against the rear wall, and face it against it.") << endl;
+  console << F("  Don't place a wall at the back of the mouse.") << endl << endl;
+
+  tmpInput = 0;
+  while (tmpInput != 13) {
+    if(tmpInput != -1) {
+      testCalibrateFrontSensors();
+
+      console << F("  Press any key to run calibration subroutine again and <enter> to continue...") << endl << endl;
+    }
+    tmpInput = console.read();
+  }
 }

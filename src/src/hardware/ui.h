@@ -55,6 +55,8 @@ void doCLI();
 
 void printSensors();
 
+void printCurrentWalls();
+
 void printMouseParameters();
 
 void printMazePlain();
