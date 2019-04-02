@@ -85,19 +85,19 @@ After, uncompressed the code in the desired location on your machine and just op
 
 ## Serial Connection
 
-Before starting the calibration process of the code for the mouse, it is required to have a Serial connection to the mouse via the Bluetooth Connector ([Lable 10](#the-kit)), not necessarly needing to be a Bluetooth adapter, any UART to USB adapter should work in this case.
+Before starting the calibration process of the code for the mouse, it is required to have a Serial connection to the mouse via the Bluetooth Connector ([Label 10](#the-kit)), not necessarily needing to be a Bluetooth adapter, any UART to USB adapter should work in this case.
 
 The MMKit UART connection is as follow:
 
 <img src="imgs/mmkit_uart.png" width=500></img>
 
-To connect to the UART you can use the program [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html), with the baudrate being 57600.
+To connect to the UART you can use the program [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html), with the baud rate being 57600.
 
-***NOTE:*** Please take note that this UART connection is only for receiveing and transmiting data from/to the MMKit at runtime, you still need to use the USB Connection to upload the sketch.
+After the Serial connection is made, you can press 'h' to get the full list of commands available through it.
+
+***NOTE:*** Please take note that this UART connection is only for receiving and transmitting data from/to the MMKit at runtime, you still need to use the USB Connection to upload the sketch.
 
 ## Calibration
-
-The calibration is extremely important in this code, seeing that with a bad calibrated robot...
 
 The calibration consists of 4 parts:
 1. Side sensors raw calibration
@@ -106,7 +106,6 @@ The calibration consists of 4 parts:
 4. Adjust the threshold values
 
 To help with this process a routine was created to help you calibrate the robot, you cal call it if connected through the UART by pressing the key 'c'.
-
 
 #### Side sensors raw calibration
 
@@ -122,9 +121,9 @@ Finally, save the read values in the variables _LD\_CAL_ and _RD\_CAL_, for the 
 #### Front sensors raw calibration
 
 <img src="imgs/mmkit_back.jpg" width=255 align="Left"></img>
-For the front sensors raw calibration, the steps are similar to before. Start by placing the mouse in a cell with a wall in each of the sides, except, this time, the mouse should be place aginst the rear wall, instead of centered in the cell.
+For the front sensors raw calibration, the steps are similar to before. Start by placing the mouse in a cell with a wall in each of the sides, except, this time, the mouse should be place against the rear wall, instead of centered in the cell.
 
-As before, when reading the sensors values, they should be similar in both side, requiring an adjustment of the sensors if the values are not alike.
+As before, when reading the sensors values, they should be similar in both sides, requiring an adjustment of the sensors if the values are not alike.
 
 To finalize, the read values must be saved in the variables _LF\_CAL_ and _RF\_CAL_, for the Front Left value and Front Right value correspondingly, inside the file _parameters.h_. 
 
@@ -136,8 +135,18 @@ The next step is to calibrate the sum/diffs for the front sensors. To do so, pos
 
 Before continuing, be sure to remove the back wall, as the mouse will move in reverse for this calibration.
  
-When the mouse is moving, be sure to not influence its trajectory, if connected to the UART by cable. If the mouse doesn't moves in a straight line, run the subroutine again.
+When the mouse is moving, be sure to not influence its movement, if connected to the UART by cable. If the mouse doesn't moves in a straight line, run the subroutine again.
 
 After the subroutine is finished, save the first array of values in the variable _frontSumTable_, and the second array of values in the variable _frontDiffTable_, inside the file _sensors.cpp_.
 
+**NOTE** If the mouse moves forward, instead of backwards, you have the motors connected in the wrong order, and you will need to swap the left with the right motor connection.
+
 #### Adjust the threshold values
+
+The final step for the calibration is to adjust the threshold values 
+
+# Usage
+
+To start a new run, position the mouse against the rear wall in the initial cell, make sure that the switch labeled 1 is faced to the right, and move switch 2 left to right, as to simulate a button. After, a red led should be turned on, just occlude the left sensors to start the discovery run.
+
+After the mouse as finished its discovery phase, it will return to the start cell. When he reaches it, don't move the mouse to the rear wall again, only adjust its angle if needed, and occlude the left sensors to start the run to the finish line.
