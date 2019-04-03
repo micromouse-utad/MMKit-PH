@@ -74,10 +74,14 @@ const int SYSTICK_FREQUENCY = 250;
 
 // Thresholds for wall detection are compared to the normalised value
 #define DIAG_THRESHOLD 60
-#define FRONT_THRESHOLD 80
+#define FRONT_THRESHOLD 75
 
 #define LEFT_FRONT_ERROR_MIN 5
 #define RIGHT_FRONT_ERROR_MIN 5
+
+// Adjustment values
+#define FRONT_DIST_ADJUST 40
+#define FRONT_ANGLE_ADJUST 40
 
 // edge positions in mm
 #define LEFT_EDGE_OFFSET MM(185L)

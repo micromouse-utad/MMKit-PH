@@ -28,12 +28,12 @@
 #include "hardware.h"
 #include "ui.h"
 #include "streaming.h"
-#include "../../maze.h"
-#include "../../motion.h"
-#include "../../motors.h"
-#include "../../sensors.h"
-#include "../../navigator.h"
-#include "../../parameters.h"
+#include "../maze.h"
+#include "../motion.h"
+#include "../motors.h"
+#include "../sensors.h"
+#include "../navigator.h"
+#include "../parameters.h"
 
 Mouse mouse;
 

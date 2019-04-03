@@ -30,7 +30,7 @@
 #include "motion.h"
 #include "sensors.h"
 #include "motors.h"
-#include "src/hardware/hardware.h"
+#include "hardware/hardware.h"
 
 
 volatile STEERING_MODE steeringMode;
@@ -182,7 +182,7 @@ void adjustFrontDistance() {
   long error = 0;
   do {
     long dist  = sensorGetFrontDistance();
-    if (dist < 40) {
+    if (dist < FRONT_DIST_ADJUST) {
       error =  MM(dist - 10);
       forward(error, 50, 0);
     }
@@ -199,7 +199,7 @@ void adjustFrontAngle() {
   long error = 0;
   do {
     long dist = sensorGetFrontDistance();
-    if (dist < 40) {
+    if (dist < FRONT_ANGLE_ADJUST) {
       error = sensorGetFrontSteering(dist);
       spin((error / 8), 50, 0);
     }

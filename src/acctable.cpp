@@ -8,7 +8,7 @@
 #include "avr/pgmspace.h"
 #include "acctable.h"
 #include "parameters.h"
-#include "src/hardware/hardware.h"
+#include "hardware/hardware.h"
 
 // The motor acceleration can be adjusted here by magic arithmetic
 // The compiler does these calculations.

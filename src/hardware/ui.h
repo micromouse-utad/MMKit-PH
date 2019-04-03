@@ -44,8 +44,8 @@ bool buttonReleased();
 // return true only if the button was pressed and then released
 void waitForClick();
 
-// return true only when <Enter> is pressed to the console
-void waitForKeyboardEnter();
+// return true only when <Space> is pressed to the console
+void waitForKeyboard();
 
 
 void panic();

@@ -29,10 +29,10 @@
 #include "hardware.h"
 #include "streaming.h"
 #include "mouse.h"
-#include "../../maze.h"
-#include "../../sensors.h"
-#include "../../test.h"
-#include "../../parameters.h"
+#include "../maze.h"
+#include "../sensors.h"
+#include "../test.h"
+#include "../parameters.h"
 
 // taken from the CATERINA bootloader - run it at least 10kHz
 static volatile unsigned int LLEDPulse;
@@ -209,11 +209,11 @@ void waitForClick() {
   while (buttonPressed()) {};
 }
 
-void waitForKeyboardEnter() {
-  console << F("Press Enter to continue...");
+void waitForKeyboard() {
+  console << F("Press <space> to continue...");
   console << endl;
   int data = 0;
-  while(data != 13) { // Enter
+  while(data != 32) { // Space
     data = console.read();
   }
 }

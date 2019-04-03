@@ -24,14 +24,14 @@
  * ARDUINO PORTING OF THE ORIGINAL
  **************************************************************************/
 
-#include "src/hardware/hardware.h"
-#include "maze.h"
-#include "sensors.h"
-#include "src/hardware/mouse.h"
-#include "motors.h"
 #include "test.h"
-#include "src/hardware/ui.h"
-#include "src/hardware/streaming.h"
+#include "maze.h"
+#include "motors.h"
+#include "sensors.h"
+#include "hardware/ui.h"
+#include "hardware/mouse.h"
+#include "hardware/hardware.h"
+#include "hardware/streaming.h"
 
 
 

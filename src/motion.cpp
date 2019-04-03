@@ -29,9 +29,9 @@
 #include "parameters.h"
 #include "motors.h"
 #include "navigator.h"
-#include "src/hardware/volatiles.h"
-#include "src/hardware/hardware.h"
-#include "src/hardware/mouse.h"
+#include "hardware/volatiles.h"
+#include "hardware/hardware.h"
+#include "hardware/mouse.h"
 
 
 
