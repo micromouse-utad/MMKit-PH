@@ -182,7 +182,7 @@ After the mouse as finished its discovery phase, it will return to the start cel
 
 ## Documentation
 
-Some aditional documentation is also available in the [latest release](https://github.com/micromouse-utad/MMKit-PH/releases/latest) page in a zip file named _MMKit-doc_. This includes:
+Some additional documentation is also available in the [latest release](https://github.com/micromouse-utad/MMKit-PH/releases/latest) page in a zip file named _MMKit-doc_. This includes:
 
 - Code documentation generated from [Doxygen](http://doxygen.nl/) 
 - The MMKit's layout
