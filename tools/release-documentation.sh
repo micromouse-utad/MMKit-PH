@@ -6,7 +6,6 @@ release_folder="MMKit-doc"
 printf "Copying doc files... "
 mkdir $release_folder
 cp -r ../doc/html $release_folder/.
-cp ../doc/MMkit-block-diagram.png $release_folder/.
 cp ../doc/MMKit_layout.A8.pdf $release_folder/.
 cp ../doc/MMKit_schematic.A6.pdf $release_folder/.
 echo "done"
