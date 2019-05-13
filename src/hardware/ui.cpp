@@ -354,7 +354,7 @@ void doCLI() {
 
 
 void printSensors() {
-  console << F("\n                      FL    L    R   FR") << endl;
+  console << F("\n                      FL   LD   RD   FR") << endl;
   console << F("Raw Values:        ");
   console << _JUSTIFY(rawFL, 5);
   console << _JUSTIFY(rawL, 5);
@@ -389,14 +389,14 @@ void printCurrentWalls() {
   if (sensL < (DIAG_THRESHOLD)) {
     console << F("         ");
   } else  if (sensL > (DIAG_THRESHOLD + 5)) {
-    console << F(" L ") << _JUSTIFY(sensL, 3) << F("|  ");
+    console << F("LD ") << _JUSTIFY(sensL, 3) << F("|  ");
     walls_detected = true;
   }
 
   if (sensR < (DIAG_THRESHOLD)) {
     console << endl;
   } else if (sensR > (DIAG_THRESHOLD + 5)) {
-    console << F("|") << _JUSTIFY(sensR, 3) << F(" R") << endl;
+    console << F("|") << _JUSTIFY(sensR, 3) << F(" RD") << endl;
     walls_detected = true;
   }
 
@@ -519,7 +519,7 @@ void printMazeDirs() {
         direction = 4;
       }
       console << ' ' << dirChars[direction];
-      //console << ' ';
+      console << ' ';
     }
     console << '|' << endl;
   }

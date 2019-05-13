@@ -39,7 +39,8 @@ unsigned long eventTrigger;
 static unsigned long boot_magic __attribute__((section(".noinit")));
 void setup() {
   hardwareInit();
-  console.begin(57600); //Opens Serial Port
+  //console.begin(57600); //Opens Serial Port
+  console.begin(9600); //Opens Serial Port
   digitalWrite(RED_LED, 1);
   sensorsDisable();
   motorsInit();
@@ -51,6 +52,7 @@ void setup() {
     // NOTE: the hardware serial port connection can provide enough power to
     // the processor to prevent it seeing a power down.
     console.println(F("\nPower Up - clearing maze.\n"));
+    mazeInit(emptyMaze);
     mouseState = FRESH_START;
     boot_magic = 0xFEEDBEEF;
   }
@@ -62,7 +64,6 @@ void setup() {
   eventTrigger = millis() + eventInterval;
   digitalWrite(RED_LED, 0);
   digitalWrite(GREEN_LED, 0);
-  mazeInit(emptyMaze);
 }
 
 int target = 0;
