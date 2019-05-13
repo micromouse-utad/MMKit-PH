@@ -34,7 +34,6 @@
 
 int getFreeRam();
 
-
 void testMove();
 void testForward(long distance, int maxSpeed);
 void testSensors();

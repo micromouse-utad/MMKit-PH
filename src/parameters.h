@@ -38,7 +38,6 @@
 #define STEERING_ERROR_MAX			32
 
 
-
 #define MOTOR_IDLE_51Hz (F_MOTOR_TIMER/51)    // motor idle frequency is 51Hz
 #define MOTOR_IDLE_57Hz (F_MOTOR_TIMER/57)    // motor idle frequency is 57Hz
 const int SYSTICK_FREQUENCY = 250;
@@ -51,14 +50,13 @@ const int SYSTICK_FREQUENCY = 250;
 // convert angles in degrees to step counts
 #define DEG(X) (((X) * STEPS_FOR_360DEG )/360L)
 
-
 // Calibration values are the raw reading from the sensor
-// NOTE: side sensors see the front wall when the mouse is centered
-#define LD_CAL 624
-#define RD_CAL 635
+#define LD_CAL 493
+#define RD_CAL 482
+
 // NOTE: front sensor calibration is with the mouse against the rear wall
-#define LF_CAL 602
-#define RF_CAL 622
+#define LF_CAL 332
+#define RF_CAL 319
 
 // values that the sensors get normalised to when the mouse is correctly positioned
 // defined as longs to prevent overflow when normalising
@@ -76,6 +74,7 @@ const int SYSTICK_FREQUENCY = 250;
 #define DIAG_THRESHOLD 60
 #define FRONT_THRESHOLD 75
 
+//
 #define LEFT_FRONT_ERROR_MIN 5
 #define RIGHT_FRONT_ERROR_MIN 5
 
@@ -90,8 +89,5 @@ const int SYSTICK_FREQUENCY = 250;
 // the level the sensor must exceed before it sees a finger in front for
 // non-contact starting
 #define SENSOR_OCCLUDED_LEVEL 100
-
-
-
 
 #endif /* PARAMETERS_H_ */

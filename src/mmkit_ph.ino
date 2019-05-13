@@ -33,8 +33,6 @@
 #include "hardware/hardware.h"
 #include "hardware/streaming.h"
 
-
-
 unsigned long eventInterval = 125; // in milliseconds
 unsigned long eventTrigger;
 
@@ -53,7 +51,6 @@ void setup() {
     // NOTE: the hardware serial port connection can provide enough power to
     // the processor to prevent it seeing a power down.
     console.println(F("\nPower Up - clearing maze.\n"));
-    mazeInit(emptyMaze);
     mouseState = FRESH_START;
     boot_magic = 0xFEEDBEEF;
   }
@@ -65,6 +62,7 @@ void setup() {
   eventTrigger = millis() + eventInterval;
   digitalWrite(RED_LED, 0);
   digitalWrite(GREEN_LED, 0);
+  mazeInit(emptyMaze);
 }
 
 int target = 0;

@@ -26,8 +26,6 @@
 #ifndef HARDWARE_H
 #define HARDWARE_H
 
-
-
 #include "Arduino.h"
 #include "digitalwritefast.h"
 

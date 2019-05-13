@@ -24,7 +24,6 @@
  *
  **************************************************************************/
 
-
 #include "ui.h"
 #include "hardware.h"
 #include "streaming.h"
@@ -241,7 +240,6 @@ void panic() {
 }
 
 
-
 void doButton() {
   digitalWrite(GREEN_LED, 1);
   while (buttonPressed()) {
@@ -267,7 +265,7 @@ void doCLI() {
   switch (data) {
     case 'g':
       console << F("Searching...") << endl;
-      testSearcher(GOAL);
+      //testSearcher(GOAL);
       break;
     case 'G':
       console << F("Running...") << endl;
@@ -275,7 +273,7 @@ void doCLI() {
       break;
     case 'c':
       console << F("Calibrate Sensors...") << endl;
-      testCalibrateSensors();
+      //testCalibrateSensors();
       break;
     case 'C':
       console << F("Calibrate Front Sensors...") << endl;
@@ -293,8 +291,8 @@ void doCLI() {
       printMazeDirs();
       printMazeCosts();
       break;
-    case 'r':
-    case 'R':
+    case 't':
+    case 'T':
       mazeFlood(GOAL);
       if (pathGenerate(0)) {
         console.println(F("\nSolution found"));
@@ -308,7 +306,7 @@ void doCLI() {
       printSensors();
       break;
     case 'S':
-      printCurrentWalls(); 
+      printCurrentWalls();
       break;
     case 'p':
     case 'P':
@@ -329,7 +327,7 @@ void doCLI() {
     case 'i':
     case 'I':
       console << F("Mouse location: 0x") << _HEX(mouse.location) << endl;
-      console << F("Mouse heading:    ") << _HEX(mouse.heading) << endl;
+      console << F("Mouse heading:  0x") << _HEX(mouse.heading) << endl;
       break;
     case 'h':
     case 'H':
@@ -355,26 +353,9 @@ void doCLI() {
 }
 
 
-void printMouseParameters() {
-  console << F("Ported Mouse parameters:") << endl;
-  console << F("  Counts per 180mm:   ") << MM(180) << endl;
-  console << F("  Counts per 360 deg: ") << DEG(360) << endl;
-  console << F("  ######################################") << endl;
-  console << F("  Left sensor calibration: ") << LD_CAL << endl;
-  console << F("  Right sensor calibration: ") << RD_CAL << endl;
-  console << F("  Front Left sensor calibration: ") << LF_CAL << endl;
-  console << F("  Front Right sensor calibration: ") << RF_CAL << endl;
-  console << F("  Front wall interference threshold: ") << FRONT_WALL_INTERFERENCE_THRESHOLD << endl;
-  console << F("  Diagonal threshold: ") << DIAG_THRESHOLD << endl;
-  console << F("  Front threshold: ") << FRONT_THRESHOLD << endl;
-  console << F("  ######################################") << endl;
-  console << F("  Goal: ") << GOAL << F(" (0x");
-  console.print(GOAL, HEX);
-  console << F(")") << endl;
-}
-
 void printSensors() {
-  console << F("\nRaw Values:        ");
+  console << F("\n                      FL    L    R   FR") << endl;
+  console << F("Raw Values:        ");
   console << _JUSTIFY(rawFL, 5);
   console << _JUSTIFY(rawL, 5);
   console << _JUSTIFY(rawR, 5);
@@ -392,31 +373,56 @@ void printSensors() {
 void printCurrentWalls() {
   boolean walls_detected = false;
   if((sensFR > FRONT_THRESHOLD) && (sensFL > FRONT_THRESHOLD)) {
-    console << sensFL << F(" __ ") << sensFR << endl;
+    console << F("FL ") << _JUSTIFY(sensFL, 3) << F(" __ ") << _JUSTIFY(sensFR, 3) << F(" FR") << endl;
     walls_detected = true;
   }
+  else if(sensFL > FRONT_THRESHOLD) {
+    console << F("FL ") << _JUSTIFY(sensFL, 3) << endl;
+  }
+  else if(sensFR > FRONT_THRESHOLD) {
+    console <<  F("          ") << _JUSTIFY(sensFR, 3) << F(" FR") << endl;
+  }
   else{
-    console << F("     ") << endl;
+    console << endl;
   }
 
   if (sensL < (DIAG_THRESHOLD)) {
-    console << F("     ");
+    console << F("         ");
   } else  if (sensL > (DIAG_THRESHOLD + 5)) {
-    console << sensL << F("|  ");
+    console << F(" L ") << _JUSTIFY(sensL, 3) << F("|  ");
     walls_detected = true;
   }
-
 
   if (sensR < (DIAG_THRESHOLD)) {
-    console << F(" ") << endl;
+    console << endl;
   } else if (sensR > (DIAG_THRESHOLD + 5)) {
-    console << F("|") << sensR << endl;
+    console << F("|") << _JUSTIFY(sensR, 3) << F(" R") << endl;
     walls_detected = true;
   }
 
-  if(walls == false) console << F("No walls detected") << endl;
+  if(walls_detected == false) console << F("No walls detected") << endl;
 }
 
+void printMouseParameters() {
+  console << F("Ported Mouse parameters:") << endl;
+  console << endl << STRING_SPACE << STRING_EQUALS << F("COUNTS") << STRING_SPACE << endl;
+  console << F("  Counts per 180mm:   ") << MM(180) << endl;
+  console << F("  Counts per 360 deg: ") << DEG(360) << endl;
+
+  console << endl << STRING_SPACE << STRING_EQUALS << F("SENSORS") << STRING_EQUALS << endl;
+  console << F("  Left sensor calibration: ") << LD_CAL << endl;
+  console << F("  Right sensor calibration: ") << RD_CAL << endl;
+  console << F("  Front Left sensor calibration: ") << LF_CAL << endl;
+  console << F("  Front Right sensor calibration: ") << RF_CAL << endl;
+
+  console << endl << F("  ==========THRESHOLDS==========") << endl;
+  console << F("  Front threshold: ")    << FRONT_THRESHOLD << endl;
+  console << F("  Diagonal threshold: ") << DIAG_THRESHOLD << endl;
+  console << F("  Front wall interference threshold: ") << FRONT_WALL_INTERFERENCE_THRESHOLD << endl;
+
+  console << endl << F("  ==========MAZE================") << endl;
+  console << F("  Goal: ") << GOAL << F(" (0x") << _HEX(GOAL) << F(")") << endl;
+}
 
 // simple formatting functions for printing maze costs
 void printHex(unsigned char value) {
@@ -426,13 +432,10 @@ void printHex(unsigned char value) {
   console.print(value, HEX);
 }
 
-
-
 /***
  * printing functions.
  * Code space can be saved here by not usingserial.print
  */
-
 void printNorthWalls(int row) {
   for (int col = 0; col < 16;  col++) {
     unsigned char cell = row + 16 * col;
@@ -505,7 +508,7 @@ void printMazeDirs() {
     printNorthWalls(row);
     for (int col = 0; col < 16; col++) {
       unsigned char cell = row + 16 * col;
-      
+
       if (hasWall(cell, WEST)) {
         console << '|';
       } else {
@@ -539,20 +542,25 @@ void printMazeWallData() {
 
 
 void printHelp() {
-  console << F("\nHelp Page for the console commands") << endl;
-  console << F("\tg   - Start Test Search") << endl;
-  console << F("\tG   - Start Run") << endl;
-  console << F("\tc   - Start Sensors Calibration") << endl;
-  console << F("\tC   - Start Front Sensors Calibration") << endl;
-  console << F("\tw,W - Print Maze Walls") << endl;
-  console << F("\tm   - Print Maze Walls Simple") << endl;
-  console << F("\tM   - Print Maze Directions and Costs") << endl;
-  console << F("\tr,R - Test Solution") << endl;
-  console << F("\ts   - Print Sensors") << endl;
-  console << F("\tS   - Print Current Walls") << endl;
-  console << F("\tp,P - Print Mouse Parameters") << endl;
-  console << F("\tx   - Reset Maze") << endl;
-  console << F("\tX   - Reset Maze to Japan 2007 Finals") << endl;
-  console << F("\ti,I - Print Mouse Location/Direction") << endl;
-  console << F("\th,H - Print Help Page") << endl;
+  console << F("\nHelp Page for the console commands.") << endl;
+  console << endl << F("Calibration Commands:") << endl;
+  console << F("   c   - Start Sensors Calibration") << endl;
+  console << F("   C   - Start Front Sensors Calibration") << endl;
+
+  console << endl << F("Print Commands:") << endl;
+  console << F("   w,W - Print Maze Walls") << endl;
+  console << F("   m   - Print Maze Walls Simple") << endl;
+  console << F("   M   - Print Maze Directions and Costs") << endl;
+  console << F("   s   - Print Sensors") << endl;
+  console << F("   S   - Print Current Walls") << endl;
+  console << F("   p,P - Print Mouse Parameters") << endl;
+  console << F("   i,I - Print Mouse Location/Direction") << endl;
+  console << F("   h,H - Print Help Page") << endl;
+
+  console << endl << F("Run Commands:") << endl;
+  console << F("   g   - Start Test Search") << endl;
+  console << F("   G   - Start Run") << endl;
+  console << F("   t,T - Test Solution") << endl;
+  console << F("   x   - Reset Maze") << endl;
+  console << F("   X   - Reset Maze to Japan 2007 Finals") << endl;
 }
