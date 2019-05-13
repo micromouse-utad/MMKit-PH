@@ -405,11 +405,11 @@ void printCurrentWalls() {
 
 void printMouseParameters() {
   console << F("Ported Mouse parameters:") << endl;
-  console << endl << STRING_SPACE << STRING_EQUALS << F("COUNTS") << STRING_SPACE << endl;
+  console << endl << F(" ==========COUNTS==========") << endl;
   console << F("  Counts per 180mm:   ") << MM(180) << endl;
   console << F("  Counts per 360 deg: ") << DEG(360) << endl;
 
-  console << endl << STRING_SPACE << STRING_EQUALS << F("SENSORS") << STRING_EQUALS << endl;
+  console << endl <<  F(" ==========SENSORS==========") << endl;
   console << F("  Left sensor calibration: ") << LD_CAL << endl;
   console << F("  Right sensor calibration: ") << RD_CAL << endl;
   console << F("  Front Left sensor calibration: ") << LF_CAL << endl;

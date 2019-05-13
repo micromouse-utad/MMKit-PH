@@ -27,9 +27,6 @@
 #ifndef UI_H_
 #define UI_H_
 
-#define STRING_EQUALS F("==========")
-#define STRING_SPACE  F("  ")
-
 extern char dirLetters[];
 void breathePin(int pin);
 // use the front sensors as an input
