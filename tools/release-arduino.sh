@@ -21,4 +21,4 @@ printf "Cleaning up... "
 rm -rf mmkit_ph
 echo "done"
 
-printf "\nRelease is finished and was stored in '%s'\n" $output_folder
+printf "\nArduino release is finished and was stored in '%s'\n" $output_folder
