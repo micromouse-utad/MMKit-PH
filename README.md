@@ -28,7 +28,7 @@ This repository is a fork of [Peter Harrison's code](https://github.com/micromou
   <tr>
     <td>1</td>
     <td>Left Diagonal IR Sensor</td>
-    <td rowspan="16"><img src="https://www.micromouse.utad.pt/wp-content/uploads/2016/05/MicromouseKit-3.png" width=450</img></td>
+    <td rowspan="16"><img src="imgs/mmkit_components.jpeg" width=450</img></td>
 
   </tr>
   <tr>
@@ -103,7 +103,7 @@ The following diagram was already provided from Peter's original repository.
 
 ## Installation
 
-There's no installation required, to run the code first download its [latest release](https://github.com/micromouse-utad/MMKit-PH/releases/latest). 
+There's no installation required, to run the code first download its [latest release](https://github.com/micromouse-utad/MMKit-PH/releases/latest).
 After, uncompressed the code in the desired location on your machine and just open the project through the Arduino IDE.
 
 ## Serial Connection
@@ -134,7 +134,7 @@ To help with this process a routine was created to help you calibrate the robot,
 
 ### Side sensors raw calibration
 
-<img src="/imgs/mmkit_centered.jpg" width=255 align="Right"></img> 
+<img src="/imgs/mmkit_centered.jpg" width=255 align="Right"></img>
 The first step in calibrating the raw value of the side sensors is to place the robot in the center of a cell, with a wall in each of the sides.
 The side sensors should be in an angle so as to detect the edges of the front wall.
 
@@ -150,7 +150,7 @@ For the front sensors raw calibration, the steps are similar to before. Start by
 
 As before, when reading the sensors values, they should be similar in both sides, requiring an adjustment of the sensors if the values are not alike.
 
-To finalize, the read values must be saved in the variables _LF\_CAL_ and _RF\_CAL_, for the Front Left value and Front Right value correspondingly, inside the file _parameters.h_. 
+To finalize, the read values must be saved in the variables _LF\_CAL_ and _RF\_CAL_, for the Front Left value and Front Right value correspondingly, inside the file _parameters.h_.
 
 &nbsp;
 ### Front sensors sum/diff calibration
@@ -159,7 +159,7 @@ To finalize, the read values must be saved in the variables _LF\_CAL_ and _RF\_C
 The next step is to calibrate the sum/diffs for the front sensors. To do so, position the mouse against the rear wall, but with the front of the mouse faced to it.
 
 Before continuing, be sure to remove the back wall, as the mouse will move in reverse for this calibration.
- 
+
 When the mouse is moving, be sure to not influence its movement, if connected to the UART by cable. If the mouse doesn't moves in a straight line, run the subroutine again.
 
 After the subroutine is finished, save the first array of values in the variable _frontSumTable_, and the second array of values in the variable _frontDiffTable_, inside the file _sensors.cpp_.
@@ -184,6 +184,6 @@ After the mouse as finished its discovery phase, it will return to the start cel
 
 Some aditional documentation is also available in the [latest release](https://github.com/micromouse-utad/MMKit-PH/releases/latest) page in a zip file named _MMKit-doc_. This includes:
 
-- Code documentation generated from [Doxygen](http://doxygen.nl/) 
+- Code documentation generated from [Doxygen](http://doxygen.nl/)
 - The MMKit's layout
 - The MMKit's schematic
