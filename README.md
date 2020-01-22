@@ -170,6 +170,12 @@ After the subroutine is finished, save the first array of values in the variable
 
 The final step for the calibration is to adjust the threshold values, for this you can use the command 'S' under the serial port that shows the walls the mouse is currently detecting together with sensor calibrated values. You can change _DIAG\_THRESHOLD_, _FRONT\_THRESHOLD_ and _FRONT\_WALL\_INTERFERENCE\_THRESHOLD_, in the file _parameters.h_, so the mouse sees the walls correctly.
 
+The _FRONT\_THRESHOLD_ must have a value that allows the MMkit to see the wall in front when it is positioned in the first part of the cell just before entering the cell.
+
+The _DIAG\_THRESHOLD_ must have a value that if the mouse is bettewen two walls and is near on of the walls he still can see the other.
+
+The _FRONT\_WALL\_INTERFERENCE\_THRESHOLD_ is the sum of the value that the side sensors see when they MMkit is in the midle of the cell, as the MMkit reaches the wall in front this values start to have the reflex from the front wall so they are unrealiable to use for adjustment, therefore the MMkit must align using the front sensors.
+
 ## Usage
 
 To start a new run, position the mouse against the rear wall in the initial cell, make sure that the switch labeled 1 is faced to the right, and move switch 2 left to right, as to simulate a button. After, a red led should be turned on, just occlude the left sensors to start the discovery run.
@@ -182,7 +188,7 @@ After the mouse as finished its discovery phase, it will return to the start cel
 
 ## Documentation
 
-Some aditional documentation is also available in the [latest release](https://github.com/micromouse-utad/MMKit-PH/releases/latest) page in a zip file named _MMKit-doc_. This includes:
+Some additional documentation is also available in the [latest release](https://github.com/micromouse-utad/MMKit-PH/releases/latest) page in a zip file named _MMKit-doc_. This includes:
 
 - Code documentation generated from [Doxygen](http://doxygen.nl/)
 - The MMKit's layout
